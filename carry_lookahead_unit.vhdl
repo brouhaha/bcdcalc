@@ -11,7 +11,7 @@ entity carry_lookahead_unit is
         c_out: out std_logic_vector (width downto 1));
 end carry_lookahead_unit;
 
-architecture behavioral of carry_lookahead_unit is
+architecture rtl of carry_lookahead_unit is
   function all_ones(val: in std_logic_vector) return std_logic is
   begin
     if val = (val'range => '1')	then
@@ -35,4 +35,4 @@ begin
       c_out (i + 1) <= val; 
     end loop;
   end process;
-end behavioral;
+end rtl;

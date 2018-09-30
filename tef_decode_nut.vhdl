@@ -16,7 +16,7 @@ entity tef_decode_nut is
 	digit_enable:    out std_logic_vector (digits - 1 downto 0));
 end tef_decode_nut;
 
-architecture behavioral of tef_decode_nut is
+architecture rtl of tef_decode_nut is
   signal pt: unsigned (3 downto 0);
   signal rd: unsigned (3 downto 0);
   signal ld: unsigned (3 downto 0);
@@ -67,4 +67,4 @@ begin
                    else '0';
   end generate;
 
-end behavioral;
+end rtl;

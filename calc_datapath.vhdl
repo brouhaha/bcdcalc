@@ -19,7 +19,7 @@ entity calc_datapath is
         c_output:     out std_logic);
 end calc_datapath;
 
-architecture behavioral of calc_datapath is
+architecture rtl of calc_datapath is
   subtype digit_index is unsigned (3 downto 0);
   signal ptr_sel_q:       std_logic;
   signal p_reg:           digit_index;
@@ -38,7 +38,7 @@ architecture behavioral of calc_datapath is
   signal digit_enable:    std_logic_vector (digits - 1 downto 0);
 begin
 
-  tef_g: entity work.tef_decode_nut(behavioral)
+  tef_g: entity work.tef_decode_nut(rtl)
     port map (field_select    => field_select,
               p               => p_reg,
               q               => q_reg,
@@ -67,7 +67,7 @@ begin
   s_output <= s_reg;
   c_output <= c_out_reg;
 
-  ba: entity work.wide_bcd_alu(behavioral)
+  ba: entity work.wide_bcd_alu(rtl)
     generic map (digits => 14)
     port map (bcd => bcd_reg,
               subtract => subtract_reg,
@@ -79,5 +79,5 @@ begin
               leftmost_digit => std_logic_vector(leftmost_digit),
               digit_enable => digit_enable);
 
-end behavioral;
+end rtl;
 

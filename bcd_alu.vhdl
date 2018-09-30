@@ -15,7 +15,7 @@ entity bcd_alu is
 	  c_out:    out std_logic);
 end bcd_alu;
 
-architecture behavioral of bcd_alu is
+architecture rtl of bcd_alu is
 
   signal r:      unsigned (3 downto 0);
   signal b_comp: unsigned (3 downto 0);
@@ -54,4 +54,4 @@ begin
 
   c_out <= sum2 (4);
 
-end behavioral;
+end rtl;

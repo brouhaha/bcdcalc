@@ -17,7 +17,7 @@ entity wide_bcd_alu is
           digit_enable:   in  std_logic_vector (digits - 1 downto 0));
 end wide_bcd_alu;
 
-architecture behavioral of wide_bcd_alu is
+architecture rtl of wide_bcd_alu is
 	signal c_in_v: std_logic_vector (digits downto 0);
 	signal g_out_v: std_logic_vector (digits - 1 downto 0);
 	signal p_out_v: std_logic_vector (digits - 1 downto 0);
@@ -40,7 +40,7 @@ begin
     end loop;
   end process;                                                  
 
-  clu0: entity work.carry_lookahead_unit(behavioral)
+  clu0: entity work.carry_lookahead_unit(rtl)
     generic map (width => digits)
     port map (c_in => c_in,
               g_in => g_out_v_masked,
@@ -48,7 +48,7 @@ begin
               c_out => c_in_v (digits downto 1));
 
   g: for i in digits - 1 downto 0 generate
-    csa_n: entity work.bcd_csa(behavioral)
+    csa_n: entity work.bcd_csa(rtl)
       port map (bcd => bcd,
                 subtract => subtract,
                 a        => a (i * 4 + 3 downto i * 4),
@@ -61,4 +61,4 @@ begin
 
   c_out <= c_in_v (to_integer (unsigned (leftmost_digit)) + 1);
 
-end behavioral;
+end rtl;
