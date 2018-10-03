@@ -63,7 +63,7 @@ begin
   leftmost_digit <= ld;
 
   de_g: for i in 0 to digits - 1 generate
-    digit_enable (i) <= '1' when i >= rd and i <= ld
+    digit_enable (i) <= '1' when i >= rd and ((i <= ld) or (ld < rd))
                    else '0';
   end generate;
 
